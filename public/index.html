@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Azure Cloud Registry Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+
+  <main class="layout">
+    <header class="hero">
+      <span class="pill">Azure ACR · Bitbucket</span>
+      <h1>Cloud Registry Builder</h1>
+      <p class="lede">
+        Pick a repo and branch, choose your registry, then build and push your image with one click.
+      </p>
+    </header>
+
+    <div class="workspace-grid">
+      <div class="panel">
+        <div class="panel-inner">
+          <section class="section" aria-labelledby="sec-source">
+          <h2 class="section-head" id="sec-source">
+            <span class="step">1</span>
+            Source
+            <button type="button" class="btn btn-reset" id="clearFormBtn" onclick="clearForm()">
+              Reset
+            </button>
+          </h2>
+          <div class="field">
+            <label for="repoUrl">Bitbucket repository URL</label>
+            <input
+              id="repoUrl"
+              class="input"
+              type="url"
+              autocomplete="url"
+              placeholder="https://bitbucket.org/workspace/repo.git"
+            />
+          </div>
+          <button type="button" class="btn btn-ghost" id="fetchBranchesBtn" onclick="loadBranches()">
+            <span class="btn-label">Fetch branches</span>
+          </button>
+          <div class="field" style="margin-top: 1rem">
+            <label for="branch">Branch</label>
+            <div class="combo">
+              <input
+                id="branch"
+                class="input combo-input"
+                type="text"
+                placeholder="Type to filter branches…"
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-controls="branch-list"
+                aria-expanded="false"
+              />
+              <ul id="branch-list" class="combo-list" role="listbox" hidden></ul>
+            </div>
+          </div>
+          </section>
+
+          <section class="section" aria-labelledby="sec-registry">
+          <h2 class="section-head" id="sec-registry">
+            <span class="step">2</span>
+            Registry
+          </h2>
+          <div class="field">
+            <label for="registry">Azure container registry</label>
+            <div class="combo">
+              <input
+                id="registry"
+                class="input combo-input"
+                type="text"
+                placeholder="Type to filter registries…"
+                autocomplete="off"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-controls="registry-list"
+                aria-expanded="false"
+              />
+              <ul id="registry-list" class="combo-list" role="listbox" hidden></ul>
+            </div>
+          </div>
+          <div class="field">
+            <label for="repository">Repository</label>
+            <div class="repo-row">
+              <div class="combo combo--grow">
+                <input
+                  id="repository"
+                  class="input combo-input"
+                  type="text"
+                  placeholder="Type to filter repositories…"
+                  autocomplete="off"
+                  role="combobox"
+                  aria-autocomplete="list"
+                  aria-controls="repository-list"
+                  aria-expanded="false"
+                />
+                <ul id="repository-list" class="combo-list" role="listbox" hidden></ul>
+              </div>
+              <button type="button" class="btn btn-secondary" id="addNewRepoBtn" onclick="toggleNewRepo()">
+                New
+              </button>
+            </div>
+          </div>
+          <div class="field">
+            <input
+              id="newRepo"
+              class="input new-repo-input hidden"
+              type="text"
+              placeholder="e.g. my-service"
+              aria-label="New repository name"
+            />
+          </div>
+          </section>
+
+          <section class="section" aria-labelledby="sec-build">
+          <h2 class="section-head" id="sec-build">
+            <span class="step">3</span>
+            Image &amp; build
+          </h2>
+          <div class="field">
+            <label for="tag">Image tag</label>
+            <input id="tag" class="input" type="text" placeholder="v1.0.0 or latest" autocomplete="off" />
+          </div>
+          <button type="button" class="btn btn-primary" id="buildBtn" onclick="startBuild()">
+            <span class="btn-label">Build &amp; push to ACR</span>
+          </button>
+          </section>
+        </div>
+      </div>
+
+      <aside class="panel log-panel">
+        <div class="panel-inner">
+          <div class="status-wrap status-wrap--side">
+            <div class="status-head">
+              <h3>Activity log</h3>
+              <button type="button" class="btn-clear" id="clearLogBtn">Clear</button>
+            </div>
+            <div id="status" class="status-log" role="log" aria-live="polite"></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <p class="footer-note">
+      API docs at <a href="/docs">/docs</a>
+    </p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+az acr build --registry infradev --image cloud-registry:v23 .
