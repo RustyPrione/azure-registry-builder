@@ -4,33 +4,33 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      Frontend (Browser)                       │
-│  (HTML/CSS/JS in /public) - Cloud Registry Builder UI         │
+│                      Frontend (Browser)                     │
+│  (HTML/CSS/JS in /public) - Cloud Registry Builder UI       │
 └──────────────────────┬──────────────────────────────────────┘
                        │ HTTP/WebSocket
                        ▼
-┌─────────────────────────────────────────────────────────────┐
-│              Express.js Backend (Node.js)                     │
-│                   server.js (Port 3000)                       │
-├──────────────────────────────────────────────────────────────┤
-│  Routes:                                                       │
+┌──────────────────────────────────────────────────────────────┐
+│              Express.js Backend (Node.js)                    │
+│                   server.js (Port 3000)                      │
+├─────────────────────────────────────────────────────────────-┤
+│  Routes:                                                     │
 │  ├─ /api/git       → Git operations (Bitbucket)              │
 │  ├─ /api/azure     → Azure registry operations               │
 │  ├─ /api/build     → Docker build & push operations          │
 │  └─ /docs          → Swagger API documentation               │
 ├──────────────────────────────────────────────────────────────┤
-│  Services (Utils):                                            │
+│  Services (Utils):                                           │
 │  ├─ gitService.js      → Bitbucket repo cloning & branching  │
 │  ├─ azureService.js    → ACR registry/repo queries           │
 │  └─ buildService.js    → Docker build & ACR push             │
 ├──────────────────────────────────────────────────────────────┤
-│  Config:                                                       │
+│  Config:                                                     │
 │  ├─ config/git.js      → Bitbucket credentials               │
 │  └─ config/azure.js    → Azure credentials                   │
 └──────────────────────────────────────────────────────────────┘
                        │
         ┌──────────────┴──────────────┐
-        ▼                              ▼
+        ▼                             ▼
 ┌──────────────────┐         ┌──────────────────┐
 │  Bitbucket API   │         │   Azure CLI      │
 │  (Git repos)     │         │   (ACR, Docker)  │
