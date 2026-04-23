@@ -117,7 +117,15 @@ A full-stack web application for seamlessly building Docker images from Bitbucke
 
 ---
 
-## 📸 Screenshots
+## � Demo Video
+
+Watch the complete workflow in action:
+
+[![Azure Registry Builder Demo](screenshots/azure.mp4)](screenshots/azure.mp4)
+
+---
+
+## �📸 Screenshots
 
 ### Main Interface
 The application provides an intuitive 3-step workflow with real-time activity logs.
